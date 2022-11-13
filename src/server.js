@@ -12,6 +12,8 @@ const server = http.createServer(app);
 const wss = new WebSocketServer({ server: server });
 const db = mongoose.connection;
 
+app.get('/', (_, res) => res.send("Hello"));
+
 db.once('open', () => {
     console.log('MongoDB connected!');
     wss.on('connection', ws => {
