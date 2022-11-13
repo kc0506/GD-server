@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { WebSocketServer } from 'ws';
 import wsConnect from "./wsConnect.js";
 
-mongo.connect();
+// mongo.connect();
 
 const app = express();
 const server = http.createServer(app);
@@ -14,13 +14,13 @@ const db = mongoose.connection;
 
 app.get('/', (_, res) => res.send("Hello"));
 
-db.once('open', () => {
-    console.log('MongoDB connected!');
-    wss.on('connection', ws => {
-        wsConnect.initData(ws);
-        ws.on('message', wsConnect.onMessage(wss, ws));
-    });
-})
+// db.once('open', () => {
+//     console.log('MongoDB connected!');
+//     wss.on('connection', ws => {
+//         wsConnect.initData(ws);
+//         ws.on('message', wsConnect.onMessage(wss, ws));
+//     });
+// })
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log("server created!"));
