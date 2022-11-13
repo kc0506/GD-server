@@ -1,16 +1,28 @@
+import { mongo } from "./mongo.js";
 import express from 'express';
-// const path = require('path')
-const PORT = process.env.PORT || 5000
+import http from 'http';
+import mongoose from "mongoose";
+import { WebSocketServer } from 'ws';
+import wsConnect from "./wsConnect.js";
 
-// express()
-//   .use(express.static(path.join(__dirname, 'public')))
-//   .set('views', path.join(__dirname, 'views'))
-//   .set('view engine', 'ejs')
-//   .get('/', (req, res) => res.render('pages/index'))
-//   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+// mongo.connect();
 
-express()
-	.get('/', (req, res) => {
-		res.send('Hello world!');
-	})
-	.listen(PORT, () => console.log(`Listening on ${PORT}`));
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server: server });
+const db = mongoose.connection;
+
+app.get('/', (_, res) => {
+    res.send("Hello");
+});
+
+// db.once('open', () => {
+//     console.log('MongoDB connected!');
+//     wss.on('connection', ws => {
+//         wsConnect.initData(ws);
+//         ws.on('message', wsConnect.onMessage(wss, ws));
+//     });
+// })
+
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => console.log("server created!"));
