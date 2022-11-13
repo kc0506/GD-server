@@ -1,11 +1,11 @@
-import { mongo } from "./mongo.js";
+import { mongo } from "./src/mongo.js";
 import express from 'express';
 import http from 'http';
 import mongoose from "mongoose";
 import { WebSocketServer } from 'ws';
-import wsConnect from "./wsConnect.js";
+import { wsConnect } from "./src/wsConnect.js";
 
-// mongo.connect();
+mongo.connect();
 
 const app = express();
 const server = http.createServer(app);
@@ -13,7 +13,7 @@ const wss = new WebSocketServer({ server: server });
 const db = mongoose.connection;
 
 app.get('/', (_, res) => {
-    res.send("Hello");
+	res.send("Hello");
 });
 
 // db.once('open', () => {

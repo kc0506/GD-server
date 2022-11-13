@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv-defaults';
 
-export const mongo = {
+const mongo = {
     connect: () => {
         // dotenv.config();
         // if (!process.env.MONGO_URL) {
@@ -24,3 +24,5 @@ export const mongo = {
             console.error.bind(console, 'connection error:'))
     },
 }
+
+export { mongo };

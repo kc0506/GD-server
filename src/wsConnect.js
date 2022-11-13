@@ -16,7 +16,7 @@ const broadcastMessage = (wss, data, status) => {
 };
 
 
-export default {
+const wsConnect = {
 	initData: (ws) => {
 		Message.find().sort({ created_at: -1 }).limit(100)
 			.exec((err, res) => {
@@ -68,3 +68,5 @@ export default {
 	)
 
 }
+
+export { wsConnect };
