@@ -16,8 +16,10 @@ export const mongo = {
             MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        }
-        ).then((res) => console.log("MongoDB connection created."))
+        })
+            .then((res) => console.log("MongoDB connection created."))
+            .catch(e => console.log(e));
+
         mongoose.connection.on('error',
             console.error.bind(console, 'connection error:'))
     },
